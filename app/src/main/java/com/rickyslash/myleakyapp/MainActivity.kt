@@ -20,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         tvPowerStatus = findViewById(R.id.tv_power_status)
     }
 
-    private fun registerBroadcastReceiver() {
+    private fun daftarBroadcastReceiver() {
         broadcastReceiver = object : BroadcastReceiver() { // BroadcastReceiver class defines what should happen when broadcast received
             override fun onReceive(context: Context?, intent: Intent?) { // this will executed when broadcast received
                 when (intent?.action) { // do this when received intent-type broadcast event
@@ -43,6 +43,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-        registerBroadcastReceiver() // start the register on start
+        daftarBroadcastReceiver() // start the register on start
+    }
+
+    override fun onStop() {
+        super.onStop()
+        unregisterReceiver(broadcastReceiver)
     }
 }
